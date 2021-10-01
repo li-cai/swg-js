@@ -73,6 +73,12 @@ describes.realWin('Doc', {}, (env) => {
       expect(gd.isReady()).to.be.true;
       expect(eventHandlers['readystatechange']).to.not.exist;
     });
+
+    it('creates a doc and waits for completion', async () => {
+      const globalDoc = new GlobalDoc(doc);
+      await globalDoc.whenComplete();
+      expect(doc.readyState).to.equal('complete');
+    });
   });
 
   describe('resolveDoc', () => {

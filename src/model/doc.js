@@ -14,7 +14,11 @@
  * limitations under the License.
  */
 
-import {isDocumentReady, whenDocumentReady} from '../utils/document-ready';
+import {
+  isDocumentReady,
+  whenDocumentComplete,
+  whenDocumentReady,
+} from '../utils/document-ready';
 
 /**
  * @interface
@@ -62,6 +66,12 @@ export class Doc {
    * @return {!Promise}
    */
   whenReady() {}
+
+  /**
+   * Resolved when document has loaded all CSS and sub-resources.
+   * @return {!Promise}
+   */
+  whenComplete() {}
 
   /**
    * Adds the element to the fixed layer.
@@ -126,6 +136,11 @@ export class GlobalDoc {
   /** @override */
   whenReady() {
     return whenDocumentReady(this.doc_);
+  }
+
+  /** @override */
+  whenComplete() {
+    return whenDocumentComplete(this.doc_);
   }
 
   /** @override */
